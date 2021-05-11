@@ -1,0 +1,620 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+<link rel="stylesheet" href="supplementals.css" title="Supplementals" type="text/css" media="screen" charset="utf-8">
+<title>Supplemental Materials #0330</title>
+</head>
+<body>
+	
+	<div id="wrapper">
+		<div id="header">
+		<h1>Color Clipping and Over-exposure Correction<br/>
+			for Videos and Still Images</h1>
+		<h2 id="subtitle">Supplemental Materials</h2>
+		<p id="abstract">The dynamic range of the real world cannot always be captured by conventional cameras. Irradiance values beyond the capacity of the camera sensors are clipped, leading to over-exposed images or videos. Further image processing, like gamut mapping, might also clip color information beyond the gamut boundary of the intended device. Irrespective of the cause, color clipping and over-exposure lead to loss of texture and detail, changing the color appearance and visual quality of the image, and potentially impacting further image processing. We propose a new over-exposure and clipping correction method for images and videos, which relies on the correlation between RGB channels of color images to recover clipped information. Using a novel segmentation approach we treat clipped regions coherently both spatially and temporally. Over-exposed areas with no information are reconstructed according to surrounding colors, maintaining the appearance of highlights, while boosting the local brightness. Our method is evaluated using objective metrics as well as a subjective study based on an ITU standardized protocol, showing that our correction leads to significantly better results than previous similar methods. Additionally, we show that our method is applicable as a general image and video enhancement algorithm or as a preprocessing step for several image processing algorithms including inverse tone mapping and feature detection. </p>
+		</div>
+	
+	<h2>Contents</h2>	
+		<p>In this webpage, we show many results of our method on still images and video content as well as several comparisons to supplement our paper. All the content is self-contained and no external links are found anywhere on this page.
+			<br/><br/>
+		All images shown were processed using the default parameters for our method as described in the paper. Please view in full screen.
+			
+			<ul>
+				<li><a href="#comparisons">Comparisons</a></li>
+				<li><a href="#results">Additional Results</a></li>
+				<li><a href="#videos">Video Comparisons</a></li>
+				<li><a href="#ldr_comparisons">Additional LDR Comparisons</a></li>
+				<li><a href="video_results/additional_videos.html">Additional Video Results</a></li>
+				<li><a href="#itmo">ITMO Application</a></li>
+				<li><a href="#parameters">Visualization of Algorithm Parameters</a></li>
+				<li><a href="#references">References</a></li>
+			</ul>
+			
+		</p>
+		
+		
+		<div class="section">
+		<a name="comparisons">
+			<h2>Comparisons</h2>
+		</a>
+		<p>The images shown below were extracted from HDR ground truth images (see Section 6 for details) and processed using our method as well as the correction methods of Guo et al. [1] and Masood et al. [2]. These images were used in our psychophysical experiment. In the following, images are visualized both using linear scaling and by tone mapping using the operator of Fattal et al. [3] as implemented within the Luminance HDR application. The parameters for the tone mapping were set according to Guo et al. [1]. Specifically, α = 0.9 and β = 0.1. Please click on each image to see the detailed results. </p>
+		<table class='preview'>
+		  <tr>
+		    <td>ACES</td>
+		    <td>Bryce</td>
+		    <td>Birds</td>
+		    <td>Butterflies</td>
+		    <td>Clock Building</td>
+		  </tr>
+		  
+		  <tr>
+		    <td>
+		       <a href="experimental_still_images/aces_scene.html">
+		       <img class='preview' src="experimental_still_images\images\ours\tone_mapped\aces_scene_out_fattal.png" alt="aces_scene" >
+		       </a>
+		    </td>
+		    
+		    <td>
+		       <a href="experimental_still_images/birds.html">
+		       <img class='preview' src="experimental_still_images\images\ours\tone_mapped\birds_out_fattal.png" alt="birds" >
+		       </a>
+		    </td>
+		    <td>
+		       <a href="experimental_still_images/bryce.html">
+		       <img class='preview' src="experimental_still_images\images\ours\tone_mapped\bryce_sm_out_fattal.png" alt="bryce" >
+		       </a>
+		    </td>
+		    <td>
+		       <a href="experimental_still_images/butterflies.html">
+		       <img class='preview' src="experimental_still_images\images\ours\tone_mapped\butterflies_out_fattal.png" alt="butterflies" >
+		       </a>
+		    </td>
+		    <td>
+		       <a href="experimental_still_images/clockbuilding.html">
+		       <img class='preview' src="experimental_still_images\images\ours\tone_mapped\clockbui_small_out_fattal.png" alt="clockbuilding" >
+		       </a>
+		    </td>
+		  </tr>
+		  <tr>
+		    <td>Corridor</td>
+		    <td>Dino</td>
+		    <td>Exploratorium</td>
+		    <td>Flowers</td>
+		    <td>Garden</td>
+		  </tr>
+		  <tr>
+		    <td>
+		       <a href="experimental_still_images/corridor.html">
+		       <img class='preview' src="experimental_still_images\images\ours\tone_mapped\corridor_out_fattal.png" alt="corridor">
+		       </a>
+		    </td>
+		    <td>
+		       <a href="experimental_still_images/dino.html">
+		       <img class='preview' src="experimental_still_images\images\ours\tone_mapped\dino_out_fattal.png" alt="dino" >
+		       </a>
+		    </td>
+		    <td>
+		       <a href="experimental_still_images/exploratorium.html">
+		       <img class='preview' src="experimental_still_images\images\ours\tone_mapped\exploratorium_out_fattal.png" alt="exploratorium" >
+		       </a>
+		    </td>
+		    <td>
+		       <a href="experimental_still_images/flowers.html">
+		       <img class='preview' src="experimental_still_images\images\ours\tone_mapped\flowers_out_fattal.png" alt="flowers" >
+		       </a>
+		    </td>
+		    <td>
+		       <a href="experimental_still_images/garden.html">
+		       <img class='preview' src="experimental_still_images\images\ours\tone_mapped\garden_out_fattal.png" alt="garden" >
+		       </a>
+		    </td>
+		    
+		  </tr>
+		  
+		  <tr>		    
+		    <td>New Zealand</td>
+		    <td>RIT Tiger</td>
+		    <td>Sink</td>
+		    <td>Statues</td>
+		    <td>Sunset</td>
+		  </tr>
+		  <tr>
+		    <td>
+		       <a href="experimental_still_images/nz.html">
+		       <img class='preview' src="experimental_still_images\images\ours\tone_mapped\nz_out_fattal.png" alt="nz" >
+		       </a>
+		    </td>
+		    <td>
+		       <a href="experimental_still_images/rittiger.html">
+		       <img class='preview' src="experimental_still_images\images\ours\tone_mapped\RITTiger_out_fattal.png" alt="rit tiger" >
+		       </a>
+		    </td>
+		    <td>
+		       <a href="experimental_still_images/sink.html">
+		       <img class='preview' src="Experimental_still_images\images\ours\tone_mapped\sink_out_fattal.png" alt="sink" >
+		       </a>
+		    </td>
+		    <td>
+		       <a href="experimental_still_images/statues.html">
+		       <img class='preview' src="experimental_still_images\images\ours\tone_mapped\statues_out_fattal.png" alt="statues" >
+		       </a>
+		    </td>
+		    <td>
+		       <a href="experimental_still_images/sunset.html">
+		       <img class='preview' src="experimental_still_images\images\ours\tone_mapped\sunsetskyscrapers_out_fattal.png" alt="sunset" >
+		       </a>
+		    </td>
+		    
+		  </tr>
+		  
+		</table>
+		
+		</div>
+		
+		
+		</br>
+		<div class="section">
+		<a name="results">
+			<h2>Additional LDR image results</h2>
+		</a>
+		<table class="preview">
+		  <tr>
+		    <td>Blue car</td>
+		    <td>Carcassonne</td>
+		    <td>Yellow car</td>
+		    <td>Loire</td>
+		    <td>Maya</td>
+		    
+		  </tr>
+		  <tr>
+		    <td>
+		       <a href="additional_ldr_images/bluecar.html">
+		       <img class='preview' src="additional_ldr_images\images\ours\linear\blue_car_ours_spec_lin.png" alt="blue_car" >
+		       </a>
+		    </td>
+		    <td>
+		       <a href="additional_ldr_images/carcassonne.html">
+		       <img class='preview' src="additional_ldr_images\images\ours\linear\carc2014_ours_spec_lin.png" alt="carcassonne" >
+		       </a>
+		    </td>
+		    <td>
+		       <a href="additional_ldr_images/yellowcar.html">
+		       <img class='preview' src="additional_ldr_images\images\ours\linear\Lambo_XGA_ours_spec_lin.png" alt="yellow car" >
+		       </a>
+		    </td>
+		    <td>
+		       <a href="additional_ldr_images/loire.html">
+		       <img class='preview' src="additional_ldr_images\images\ours\linear\loire_ours_spec_lin.png" alt="loire" >
+		       </a>
+		    </td>
+		    <td>
+		       <a href="additional_ldr_images/maya.html">
+		       <img class='preview' src="additional_ldr_images\images\ours\linear\maya_ours_spec_lin.png" alt="maya" >
+		       </a>
+		    </td>
+		    
+		  </tr>
+		
+		  <tr>
+			<td>Memorial</td>
+		    <td>Portrait</td>
+		    <td>Red car</td>
+		    <td>Sun rise</td>
+		    <td>Blue motorbike</td>
+		  </tr>
+		  <tr>
+			<td>
+		       <a href="additional_ldr_images/memorial.html">
+		       <img class='preview' src="additional_ldr_images\images\ours\linear\memorial_best_ours_spec_lin.png" alt="memorial" >
+		       </a>
+		    </td>
+		    <td>
+		       <a href="additional_ldr_images/portrait.html">
+		       <img class='preview' src="additional_ldr_images\images\ours\linear\portrait_kid_ours_spec_lin.png" alt="portrait_kid" >
+		       </a>
+		    </td>
+		    <td>
+		       <a href="additional_ldr_images/redcar.html">
+		       <img class='preview' src="additional_ldr_images\images\ours\linear\red_cars_ours_spec_lin.png" alt="red car" >
+		       </a>
+		    </td>
+		    <td>
+		       <a href="additional_ldr_images/sunrise.html">
+		       <img class='preview' src="additional_ldr_images\images\ours\linear\sunrises_ours_spec_lin.png" alt="sunrise" >
+		       </a>
+		    </td>
+		    <td>
+		       <a href="additional_ldr_images/bluemotorbike.html">
+		       <img class='preview' src="additional_ldr_images\images\ours\linear\motorcycle_ours_diff_lin.png" alt="blue motorbike" >
+		       </a>
+		    </td>
+		  </tr>
+		  
+		</table>
+		
+		<a name="ldr_comparisons">
+			<h2>Additional LDR Comparisons</h2>
+		</a>
+		
+		<table class="preview">
+			<tr>
+				<th colspan="5">Tonemapped with Fattal et al.[3]</th>
+			</tr>
+			<tr>
+				<td>Clipped Input</td>
+				<td>Our Correction</td>				
+				<td>Guo et al. [1]</td>
+				<td>Masood et al. [2]</td>
+				<td>Assefa et al. [4]</td>
+			</tr>
+			<tr>
+				<td><a href="additional_comparisons/images/gold_input.png"><img class="preview" src="additional_comparisons/images/gold_input.png"></a></td>
+				<td><a href="additional_comparisons/images/gold_ours.png"><img class="preview" src="additional_comparisons/images/gold_ours.png"></a></td>
+				<td><a href="additional_comparisons/images/gold_guo_tmo.png"><img class="preview" src="additional_comparisons/images/gold_guo_tmo.png"></a></td>
+				<td><a href="additional_comparisons/images/gold_masood_tmo.png"><img class="preview" src="additional_comparisons/images/gold_masood_tmo.png"></a></td>
+				<td><a href="additional_comparisons/images/gold_assefa_tmo.png"><img class="preview" src="additional_comparisons/images/gold_assefa_tmo.png"></a></td>		
+				
+			</tr>
+			<tr>
+				<th colspan="5">Linearly Compressed</th>
+			</tr>
+			<tr>
+				<td>Clipped Input</td>
+				<td>Our Correction</td>				
+				<td>Guo et al. [1]</td>
+				<td>Masood et al. [2]</td>
+				<td>Assefa et al. [4]</td>
+			</tr>
+			<tr>
+				<td><a href="additional_comparisons/images/gold_input.png"><img class="preview" src="additional_comparisons/images/linear/gold_input_lin.png"></a></td>
+				<td><a href="additional_comparisons/images/gold_ours.png"><img class="preview" src="additional_comparisons/images/linear/gold_ours_lin.png"></a></td>
+				<td><p>The method of Guo et al. [1] incorporates a tone compression step. As such comparisons with this method are only possible for the tone mapping case. The parameters reported by Guo et al. for the TMO of Fattal et al. were used for the results in the first row.</p></td>
+				<td><a href="additional_comparisons/images/gold_masood_tmo.png"><img class="preview" src="additional_comparisons/images/linear/gold_masood_lin.png"></a></td>
+				<td><a href="additional_comparisons/images/gold_assefa_tmo.png"><img class="preview" src="additional_comparisons/images/linear/gold_assefa_lin.png"></a></td>		
+				
+			</tr>
+		</table>
+				
+		
+		</div>
+		
+		
+		
+		</br></br>
+		<div class="section">
+		<a name="videos">
+			<h2>Video results and comparisons</h2>
+		</a>
+		<p>Several video examples are shown below. To see more video results <a href="video_results/additional_videos.html"> click here </a></p>
+
+		<p> Our method recovers the corect color on the petals of the flower and the face of the journalist, in the first and third videos. Also, the color and details are recovered on the ground, the sky and the mountains of the second and the last videos. </p> 
+		<p>Our full method leads to temporally coherent results, while the videos processed without temporal smoothing, or with the method by Masood et al.[2], flicker around the mountain, the petals and the sky of the second, third and fourth videos, respectively. </p>
+
+		<table class="video">
+		<tr><th colspan="2">Correction Visualization</th></tr>
+		
+		  <tr>
+		    <td>Clipped Input</td>
+		    <td>Our Correction</td>
+		  </tr>
+		  <tr>
+		    <td>
+		      <video class="single" controls>
+		         <source src="video_results\main_example\Rich_Eisen_in.mp4" type="video/mp4">
+		         use Internet Explorer 9+, Firefox, Opera, Chrome, or Safari.
+		      </video>
+		    </td>
+		    <td>
+		      <video class="single" controls>
+		         <source src="video_results\main_example\Rich_Eisen_out.mp4" type="video/mp4">
+		         use Internet Explorer 9+, Firefox, Opera, Chrome, or Safari.
+		      </video>
+		    </td>
+		  </tr>
+		  <tr>
+		    <td>Clipping Mask</td>
+		    <td>Difference</td>
+		  </tr>
+		  <tr>
+		    
+		    <td>
+		      <video class="single" controls>
+		         <source src="video_results\main_example\Rich_Eisen_msk.mp4" type="video/mp4">
+		         use Internet Explorer 9+, Firefox, Opera, Chrome, or Safari.
+		      </video>
+		    </td>
+		
+		    <td>
+		      <video class="single" controls>
+		         <source src="video_results\main_example\Rich_Eisen_diff.mp4" type="video/mp4">
+		         use Internet Explorer 9+, Firefox, Opera, Chrome, or Safari.
+		      </video>
+		    </td>
+		</table>
+		
+		
+		
+		
+		<table class="video">
+			<tr>
+				<th colspan="2">With Temporal Smoothing</th>
+			</tr>
+		  <tr>
+		    <td>Clipped Input</td>
+		    <td>Our Correction</td>
+		  </tr>
+		  
+		  
+		  <tr>
+		    <td>
+		      <video class="single" controls>
+		         <source src="video_results\temporal_effect\water_bright_input_linear.mp4" type="video/mp4">
+		         use Internet Explorer 9+, Firefox, Opera, Chrome, or Safari.
+		      </video>
+		    </td>
+			<td>
+		      <video class="single" controls>
+		         <source src="video_results\temporal_effect\water_bright_output_smooth_linear.mp4" type="video/mp4">
+		         use Internet Explorer 9+, Firefox, Opera, Chrome, or Safari.
+		      </video>
+		    </td>
+		  </tr>
+		  
+		  
+		  <tr>
+			  <th colspan="2">No Temporal Smoothing</th>
+		  </tr>
+		  <tr>
+		    <td>Our Correction</td>
+		    <td>Masood et al. [2]</td>
+		  </tr>
+		  <tr>
+		
+		    <td>
+		      <video class="single"  controls>
+		         <source src="video_results\temporal_effect\water_bright_output_linear.mp4" type="video/mp4">
+		         use Internet Explorer 9+, Firefox, Opera, Chrome, or Safari.
+		      </video>
+		    </td>
+		
+		    <td>
+		      <video class="single" controls>
+		         <source src="video_results\temporal_effect\water_bright_masood_linear.mp4" type="video/mp4">
+		         use Internet Explorer 9+, Firefox, Opera, Chrome, or Safari.
+		      </video>
+		    </td>
+		 </tr>
+		 
+		</table>
+		
+		<table class="video">
+			<tr>
+				<th colspan="2">With Temporal Smoothing</th>
+			</tr>
+		  <tr>
+		    <td>Clipped Input</td>
+		    <td>Our Correction</td>
+		  </tr>
+		  
+		  <tr>
+		    <td>
+		      <video class="single" controls>
+		         <source src="video_results\temporal_effect\pinkflower_input_linear.mp4" type="video/mp4">
+		         use Internet Explorer 9+, Firefox, Opera, Chrome, or Safari.
+		      </video>
+		    </td>
+			<td>
+		      <video class="single" controls>
+		         <source src="video_results\temporal_effect\pinkflower_output_smooth_linear.mp4" type="video/mp4">
+		         use Internet Explorer 9+, Firefox, Opera, Chrome, or Safari.
+		      </video>
+		    </td>
+		  </tr>
+		  
+		  <tr>
+			  <th colspan="2">No Temporal Smoothing</th>
+		  </tr>
+		  <tr>
+		    <td>Our Correction</td>
+		    <td>Masood et al. [2]</td>
+		  </tr>
+		  <tr>
+		
+		    <td>
+		      <video class="single"  controls>
+		         <source src="video_results\temporal_effect\pinkflower_output_linear.mp4" type="video/mp4">
+		         use Internet Explorer 9+, Firefox, Opera, Chrome, or Safari.
+		      </video>
+		    </td>
+		
+		    <td>
+		      <video class="single" controls>
+		         <source src="video_results\temporal_effect\pinkflower_masood_linear.mp4" type="video/mp4">
+		         use Internet Explorer 9+, Firefox, Opera, Chrome, or Safari.
+		      </video>
+		    </td>
+		 </tr>
+		</table>
+
+		
+		<table class="video">
+			<tr>
+				<th colspan="2">With Temporal Smoothing</th>
+			</tr>
+		  <tr>
+		    <td>Clipped Input</td>
+		    <td>Our Correction</td>
+		  </tr>
+		  
+		  <tr>
+		    <td>
+		      <video class="single" controls>
+		         <source src="video_results\temporal_effect\utah_in_wt.mp4" type="video/mp4">
+		         use Internet Explorer 9+, Firefox, Opera, Chrome, or Safari.
+		      </video>
+		    </td>
+			<td>
+		      <video class="single" controls>
+		         <source src="video_results\temporal_effect\utah_out_wt.mp4" type="video/mp4">
+		         use Internet Explorer 9+, Firefox, Opera, Chrome, or Safari.
+		      </video>
+		    </td>
+		  </tr>
+		  
+		  <tr>
+			  <th colspan="2">No Temporal Smoothing</th>
+		  </tr>
+		  <tr>
+		    <td>Our Correction</td>
+		    <td>Masood et al. [2]</td>
+		  </tr>
+		  <tr>
+		
+		    <td>
+		      <video class="single"  controls>
+		         <source src="video_results\temporal_effect\utah_out.mp4" type="video/mp4">
+		         use Internet Explorer 9+, Firefox, Opera, Chrome, or Safari.
+		      </video>
+		    </td>
+		
+		    <td>
+		      <video class="single" controls>
+		         <source src="video_results\temporal_effect\utah_out_masood.mp4" type="video/mp4">
+		         use Internet Explorer 9+, Firefox, Opera, Chrome, or Safari.
+		      </video>
+		    </td>
+		 </tr>
+		</table>
+		
+		</div>
+		</br></br>
+		</br></br>
+		
+		<div class="section">
+			
+		<a name="itmo">
+			<h2>Application in ITMO</h2>
+		</a>
+		<p>Here, we show examples of combining our method with inverse tone mapping. In particular, the ITMO of Huo et al. [5] is used. Please click on the thumbnails below to view the full results. <br/><br/>
+		To visualize the ITMO results, we use the HTML viewer from PFS Tools. To explore the dynamic range of the images, please use the histogram slider below each image. </p>
+		
+		<table class="preview">
+		  <tr>
+		    <td>Lambo XGA</td>
+		    <td>Memorial</td>
+		    <td>Red Cars</td>
+			<td>Sunset Skyscrapers</td>
+			<td>Sunrise</td>
+		  </tr>
+		  
+		  <tr>
+
+		    <td><a href="itmo_results\Lambo_XGA\Lambo_XGA.html"><img class="preview" src="itmo_results\thumbs\Lambo_XGA_huo.png" alt="Lambo_XGA"></a></td>
+		    <td><a href="itmo_results\memorial\memorial.html"><img class="preview" src="itmo_results\thumbs\memorial_huo.png" alt="Memorial"></a></td>
+		    <td><a href="itmo_results\red_cars\red_cars.html"><img class="preview" src="itmo_results\thumbs\red_cars_huo.png" alt="Red Cars"></a></td>
+		    <td><a href="itmo_results\sunsetskyscrapers\sunsetskyscrapers.html"><img class="preview" src="itmo_results\thumbs\sunsetskyscrapers_huo.png" alt="Sunset"></a></td>
+		    <td><a href="itmo_results\sunrise\sunrise.html"><img class="preview" src="itmo_results\thumbs\sunrise_huo.png" alt="Sunrise"></a></td>
+
+		  </tr>
+		</table> 
+		
+		</div>
+		
+		<div class="section">
+			<a name="parameters">
+				<h2>Visualization of Algorithm Parameters</h2>
+			</a>
+			<p>Here, we show the effect of changing the values of parameters for the <emph>over-exposure correction</emph> step of our algorithm. Specifically, we vary the following parameters:
+				<ul>
+					<li>The size of the erosion, κ</li>
+					<li>The percentage of the number of pixels within a region, c</li>
+					<li>The exponent γ used to finally compute the parameter σ<sub>s</sub> for the cross bilateral filtering step</li>
+				</ul>
+			</p>
+			
+			<table id="overexp_params">
+				<tr><th colspan='9'>c = 0.01</th></tr>
+				<tr>
+					<td>γ = 0.80, κ = 3</td><td>γ = 0.80, κ = 10</td><td>γ = 0.80, κ = 50</td>
+					<td>γ = 1.00, κ = 3</td><td>γ = 1.00, κ = 10</td><td>γ = 1.00, κ = 50</td>
+					<td>γ = 1.20, κ = 3</td><td>γ = 1.20, κ = 10</td><td>γ = 1.20, κ = 50</td>
+				</tr>
+				<tr>
+					<td><img src="algorithm_parameters/001_c0.01_gamma0.80_kappa3_out.png"></td>
+					<td><img src="algorithm_parameters/001_c0.01_gamma0.80_kappa10_out.png"></td>
+					<td><img src="algorithm_parameters/001_c0.01_gamma0.80_kappa50_out.png"></td>
+					
+					<td><img src="algorithm_parameters/001_c0.01_gamma1.00_kappa3_out.png"></td>
+					<td><img src="algorithm_parameters/001_c0.01_gamma1.00_kappa10_out.png"></td>
+					<td><img src="algorithm_parameters/001_c0.01_gamma1.00_kappa50_out.png"></td>
+					
+					<td><img src="algorithm_parameters/001_c0.01_gamma1.20_kappa3_out.png"></td>
+					<td><img src="algorithm_parameters/001_c0.01_gamma1.20_kappa10_out.png"></td>
+					<td><img src="algorithm_parameters/001_c0.01_gamma1.20_kappa50_out.png"></td>
+					
+				</tr>
+				<tr><th colspan='9'>c = 0.05</th></tr>
+				<tr>
+					<td>γ = 0.80, κ = 3</td><td>γ = 0.80, κ = 10</td><td>γ = 0.80, κ = 50</td>
+					<td>γ = 1.00, κ = 3</td><td>γ = 1.00, κ = 10</td><td>γ = 1.00, κ = 50</td>
+					<td>γ = 1.20, κ = 3</td><td>γ = 1.20, κ = 10</td><td>γ = 1.20, κ = 50</td>
+				</tr>
+				<tr>
+					<td><img src="algorithm_parameters/001_c0.05_gamma0.80_kappa3_out.png"></td>
+					<td><img src="algorithm_parameters/001_c0.05_gamma0.80_kappa10_out.png"></td>
+					<td><img src="algorithm_parameters/001_c0.05_gamma0.80_kappa50_out.png"></td>
+					
+					<td><img src="algorithm_parameters/001_c0.05_gamma1.00_kappa3_out.png"></td>
+					<td><img src="algorithm_parameters/001_c0.05_gamma1.00_kappa10_out.png"></td>
+					<td><img src="algorithm_parameters/001_c0.05_gamma1.00_kappa50_out.png"></td>
+					
+					<td><img src="algorithm_parameters/001_c0.05_gamma1.20_kappa3_out.png"></td>
+					<td><img src="algorithm_parameters/001_c0.05_gamma1.20_kappa10_out.png"></td>
+					<td><img src="algorithm_parameters/001_c0.05_gamma1.20_kappa50_out.png"></td>
+					
+				</tr>
+				<tr><th colspan='9'>c = 0.10</th></tr>
+				<tr>
+					<td>γ = 0.80, κ = 3</td><td>γ = 0.80, κ = 10</td><td>γ = 0.80, κ = 50</td>
+					<td>γ = 1.00, κ = 3</td><td>γ = 1.00, κ = 10</td><td>γ = 1.00, κ = 50</td>
+					<td>γ = 1.20, κ = 3</td><td>γ = 1.20, κ = 10</td><td>γ = 1.20, κ = 50</td>
+				</tr>
+				<tr>
+					<td><img src="algorithm_parameters/001_c0.10_gamma0.80_kappa3_out.png"></td>
+					<td><img src="algorithm_parameters/001_c0.10_gamma0.80_kappa10_out.png"></td>
+					<td><img src="algorithm_parameters/001_c0.10_gamma0.80_kappa50_out.png"></td>
+					
+					<td><img src="algorithm_parameters/001_c0.10_gamma1.00_kappa3_out.png"></td>
+					<td><img src="algorithm_parameters/001_c0.10_gamma1.00_kappa10_out.png"></td>
+					<td><img src="algorithm_parameters/001_c0.10_gamma1.00_kappa50_out.png"></td>
+					
+					<td><img src="algorithm_parameters/001_c0.10_gamma1.20_kappa3_out.png"></td>
+					<td><img src="algorithm_parameters/001_c0.10_gamma1.20_kappa10_out.png"></td>
+					<td><img src="algorithm_parameters/001_c0.10_gamma1.20_kappa50_out.png"></td>
+					
+				</tr>
+				
+			</table>
+			
+		</div>
+		
+		<div class="section">
+			<a name="references">
+				<h2>References</h2>
+			</a>
+			<ul class="references">
+			<li>[1] Guo, D., Cheng, Y., Zhuo, S., and Sim, T., Correcting over-exposure in photographs, Computer Vision and Pattern Recognition (CVPR), 2010, 515-521, (2010)</li>
+			<li>[2] Masood, S. Z., Zhu, J., and Tappen, M. F., Automatic Correction of Saturated Regions in Photographs using Cross-Channel Correlation, Computer Graphics Forum, 1861-1869, (2009) </li>
+			<li>[3] Fattal, R., Lischinski, D., and Werman, M., Gradient domain high dynamic range compression. ACM Transactions on Graphics, 21(3), 249--256  (2002)</li>
+			<li>[4] Assefa, M. A., Pouli, T., and Kervec, J., Correction of Over-Exposure using Color Channel Correlations, IEEE GlobalSIP, (2014) </li>
+			<li>[5] Huo, Y., Yang, F., and Brost, V., Inverse Tone Mapping Based upon Retina Response. The Scientific World Journal,  (2014)</li>
+			</ul>
+		</div>
+		
+		</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+body {
+	background-color: #171b1f;
+	color: #EEEEEE;
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	font-size: 11pt;
+	margin: 0px;
+	padding: 0px;
+	
+	
+}
+
+#wrapper {
+	width: 90%;
+	padding: 20px;
+	margin-left: auto; 
+	margin-right: auto;
+	background-color: #363e45
+	
+	
+}
+
+
+h1 {
+	color: #c7d9e8;
+	font-size: 24pt;
+	text-align: center;
+	
+}
+
+h2 {
+	color:#809fb9;
+	font-size: 16pt;
+}
+
+h2#subtitle {
+	text-align: center;
+	font-style: italic;
+	font-weight: 100;
+}
+
+a:link {
+    color: #809fb9;
+}
+
+/* visited link */
+a:visited {
+    color: #c7d9e8;
+}
+
+
+
+/* selected link */
+a:active {
+    color: #809fb9;
+}
+
+
+
+p {
+	text-align: justify;
+}
+
+
+
+#abstract {
+	padding-left: 15%;
+	padding-right: 15%;
+	text-align: justify;
+}
+
+table {
+	width: 100%;
+}
+
+/* Table with image thumbnails */
+table.preview {
+	text-align: center;
+	border-collapse: collapse;
+	
+}
+
+table.preview td {
+	border-spacing: 0px;
+	border: 1px dashed #EEE;
+	
+	
+}
+
+table.preview p {
+	max-width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+	
+}
+
+img.preview {
+	max-width: 200px;
+    max-height: 200px;
+    margin: 5%; 
+      
+}
+
+
+/* Table for videos */
+table.video {
+	width: 100%;
+	text-align: center;
+	border-collapse: collapse;
+	border: 1px dashed #EEE;
+}
+
+
+table.video th {
+	color: #c7d9e8;
+	padding-top: 20px;
+	border: 1px dashed #EEE;
+	
+}
+
+ul.references {
+	list-style: none;
+}
+video.double {
+	width: 1000px;
+}
+video.single {
+	width: 90%;
+	max-width: 640px;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+/* Table for individual results */
+table.results {
+	text-align: center;
+	border-spacing: 0px;
+	padding: 0px;
+	margin: 0px
+}
+
+table.results td {
+	border-top: 1px dashed #EEE;
+	padding: 10px;
+	
+}
+
+table.results img {
+	max-width: 100%;
+	padding: 0px;
+	margin: 0px;
+}
+
+/* Table for algorithm parameters */
+table#overexp_params {
+	text-align: center;
+	border: 1px dashed #EEE;
+	border-collapse: collapse;
+}
+table#overexp_params th {
+	color: #c7d9e8;
+	border-bottom: 1px dashed #EEE;
+	border-top: 1px dashed #EEE;
+}
+table#overexp_params img {
+	width: 94%;
+	margin: 3%
+	max-width: 200px;
+}
